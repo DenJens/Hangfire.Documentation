@@ -6,17 +6,17 @@ Using Redis
 
    Starting from Hangfire 1.2, this feature is a part of `Hangfire Pro <https://www.hangfire.io/pro/>`_ package set
 
-Hangfire with Redis job storage implementation processes jobs much faster than with SQL Server storage. On my development machine I observed more than 4x throughput improvement with empty jobs (method that does not do anything). ``Hangfire.Pro.Redis`` leverages the ``BRPOPLPUSH`` command to fetch jobs, so the job processing latency is kept to minimum.
+Hangfire with Redis job storage implementation processes jobs much faster than with SQL Server storage. On my development machine I observed more than 4x throughput improvement with empty jobs (a method that does not do anything). ``Hangfire.Pro.Redis`` leverages the ``BRPOPLPUSH`` command to fetch jobs, so the job processing latency is kept to minimum.
 
 .. image:: storage-compare.png
    :align: center
 
-Please, see the `downloads page <http://redis.io/download>`_ to obtain latest version of Redis. If you unfamiliar with this great storage, please see its `documentation <http://redis.io/documentation>`_. Binaries for Windows are available through NuGet (`32-bit <https://www.nuget.org/packages/Redis-32/>`_, `64-bit <https://www.nuget.org/packages/Redis-64/>`_) and Chocolatey galleries (`64-bit package <http://chocolatey.org/packages/redis-64>`_ only).
+Please, see the `downloads page <http://redis.io/download>`_ to obtain the latest version of Redis. If you are unfamiliar with this great storage option, please see its `documentation <http://redis.io/documentation>`_. Binaries for Windows are available through NuGet (`32-bit <https://www.nuget.org/packages/Redis-32/>`_, `64-bit <https://www.nuget.org/packages/Redis-64/>`_) and Chocolatey galleries (`64-bit package <http://chocolatey.org/packages/redis-64>`_ only).
 
 Limitations
 ------------
 
-Multiple Redis endpoints are **only supported** in Redis Cluster configuration starting from `Hangfire.Pro.Redis 2.1.0 <https://www.hangfire.io/blog/2017/04/17/hangfire.pro.redis-2.1.0.html>`_. You can't use multiple detached masters or Redis Sentinel configurations.
+Multiple Redis endpoints are **only supported** in Redis Cluster configuration starting from `Hangfire.Pro.Redis 2.1.0 <https://www.hangfire.io/blog/2017/04/17/hangfire.pro.redis-2.1.0.html>`_. You cannot use multiple detached masters or Redis Sentinel configurations.
 
 Redis Configuration
 --------------------
