@@ -6,7 +6,7 @@ Before we start with our tutorial, we need to have a working ASP.NET Core applic
 Installing Hangfire
 --------------------
 
-Hangfire is available as a set of NuGet packages, so you need to add them to the ``*.csproj`` file by adding new ``PackageReference`` tags as below. Please note that versions in the code snippet below may be outdated, so use versions from the following badges. They are updated in real-time.
+Hangfire is available as a set of NuGet packages, so you need to add them to the ``*.csproj`` file by adding new ``PackageReference`` tags as denoted below. Please note that versions in the code snippet below may be outdated, so use versions from the following badges. They are updated in real-time.
 
 .. |latest-core| image:: https://img.shields.io/nuget/v/Hangfire.Core.svg?label=Hangfire.Core
 .. |latest-aspnetcore| image:: https://img.shields.io/nuget/v/Hangfire.AspNetCore.svg?label=Hangfire.AspNetCore
@@ -27,9 +27,9 @@ Hangfire is available as a set of NuGet packages, so you need to add them to the
 Creating a database
 -------------------
 
-As you can see from the snippet above, we'll be using SQL Server as a job storage in this article. Before configuring Hangfire, you'll need to create a database for it, or use an existing one. Configuration strings below point to the ``HangfireTest`` database living in the ``SQLEXPRESS`` instance on a local machine.
+As you can see from the snippet above, we will be using SQL Server for job storage in this article. Before configuring Hangfire, you will need to create a database for it, or use an existing one. Configuration strings below point to the ``HangfireTest`` database living in the ``SQLEXPRESS`` instance on a local machine.
 
-You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using an other database name or instance, ensure you've changed the connection strings when configuring Hangfire during the next steps.
+You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using another database name or instance, ensure you have changed the connection strings when configuring Hangfire during the next steps.
 
 .. code-block:: sql
 
@@ -39,9 +39,9 @@ You can use SQL Server Management Studio or any other way to execute the followi
 Configuring Hangfire
 ---------------------
 
-We'll start our configuration process with defining a configuration string for the ``Hangfire.SqlServer`` package. Consider you have an ``sqlexpress`` named instance running on localhost, and **just created the "HangfireTest" database**. The current user should be able to create tables, to allow automatic migrations to do their job.
+We will start our configuration process with defining a configuration string for the ``Hangfire.SqlServer`` package. Now if you have an ``sqlexpress`` named instance running on localhost, and you **just created the "HangfireTest" database**. The current user should be able to create tables, to allow automatic migrations to do their job.
 
-Also, the ``Hangfire.AspNetCore`` package has a logging integration with ASP.NET Core applications. Hangfire's log messages are sometimes very important and help to diagnose different issues. ``Information`` level allows to see how Hangfire is working, and ``Warning`` and higher log levels help to investigate problems.
+Also, the ``Hangfire.AspNetCore`` package has a logging integration with ASP.NET Core applications. Hangfire's log messages are sometimes very important and help to diagnose different issues. ``Information`` level allows you to see how Hangfire is working, and ``Warning`` and higher log levels help you to investigate problems.
 
 Configuring Settings
 ~~~~~~~~~~~~~~~~~~~~
@@ -76,7 +76,7 @@ After updating the application settings, open the ``Startup.cs`` file. The start
 Registering Services
 ~~~~~~~~~~~~~~~~~~~~
 
-Dependency Injection is one of the primary techniques introduced in ASP.NET Core. The ``Hangfire.AspNetCore`` integration package adds an extension method to register all the services, their implementation, as well as logging and a job activator. As a parameter, it takes an action that allows to configure Hangfire itself.
+Dependency Injection is one of the primary techniques introduced in ASP.NET Core. The ``Hangfire.AspNetCore`` integration package adds an extension method to register all the services, their implementation, as well as logging and a job activator. As a parameter, it takes an action that allows one to configure Hangfire itself.
 
 .. admonition:: Configuration settings below for new installations only
    :class: note
@@ -112,7 +112,7 @@ Dependency Injection is one of the primary techniques introduced in ASP.NET Core
 Adding Dashboard UI
 ~~~~~~~~~~~~~~~~~~~
 
-After registering Hangfire types, you can now choose features you need to add to your application. The following snippet shows you how to add the Dashboard UI to use all the Hangfire features immediately. The following lines are fully optional, and you can remove them completely, if your application will only create background jobs, as separate application will process them.
+After registering Hangfire types, you can now choose features you need to add to your application. The following snippet shows you how to add the Dashboard UI to use all the Hangfire features immediately. The following lines are fully optional and you can remove them completely, if your application will only create background jobs, as separate application will process them.
 
 .. admonition:: Authorization configuration required for non-local requests
    :class: warning
@@ -186,13 +186,13 @@ After the application has been started and background processing was started suc
 
 These lines contain messages regarding SQL Server Job Storage that is used to persist background jobs, and the Background Job Server, which is processing all the background jobs.
 
-The following message should also appear, since we created background job, whose only behavior is to write a message to the console.
+The following message should also appear, since we created a background job, whose only behavior is to write a message to the console.
 
 .. code-block:: bash
 
    Hello world from Hangfire!
 
-When the application has started, open the following URL (assuming your app is running on the 5000 port), to access to the Hangfire Dashboard interface. As we can see, our background job was completed successfully.
+When the application has started, open the following URL (assuming your app is running on the 5000 port), to get access to the Hangfire Dashboard interface. As we can see, our background job was completed successfully.
 
 .. code-block:: bash
 
@@ -200,7 +200,7 @@ When the application has started, open the following URL (assuming your app is r
 
 .. image:: first-job.png
 
-When you finished working with the application, press the :kbd:`Ctrl+C` in your console window to stop the application. The following message should appear telling you that background processing server was stopped gracefully.
+When you finished working with the application, press the :kbd:`Ctrl+C` in your console window to stop the application. The following message should appear telling you that the background processing server was stopped gracefully.
 
 .. code-block:: bash
 
