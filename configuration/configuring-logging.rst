@@ -1,11 +1,11 @@
 Configuring logging
 ===================
 
-Logging plays an important role in background processing, where work is performed behind the scenes. :doc:`Dashboard UI <using-dashboard>` can greatly help to reveal problems with user code, background jobs themselves. But it works by querying the job storage and requires the information is properly written first, before displaying it.
+Logging plays an important role in background processing, where work is performed behind the scenes. :doc:`Dashboard UI <using-dashboard>` can greatly help to reveal problems with user code and background jobs themselves. But it works by querying the job storage and requires that the information is properly written first, before displaying it.
 
-Even if Hangfire itself doesn't contain any errors, there may be connectivity issues, network blips, problems with the storage instance, different timeout issues and so on. And without logging it's very hard to diagnose those problems and understand what to do – exceptions are thrown in background and may get unnoticed.
+Even if Hangfire itself does not contain any errors, there may be connectivity issues, network blips, problems with the storage instance, different timeout issues and so on. And without logging this information it is very hard to diagnose those problems and understand what to do – exceptions are thrown in the background and may get unnoticed.
 
-Logging subsystem in Hangfire is abstracted by using the `LibLog <https://github.com/damianh/LibLog>`_ package to allow you to integrate it with any infrastructure. Also, you don't need to configure logging if your application doesn't create any background processing servers – client methods don't log anything, they just throw exceptions on errors.
+Logging subsystem in Hangfire is abstracted by using the `LibLog <https://github.com/damianh/LibLog>`_ package to allow you to integrate it with any infrastructure. Also, you do not need to configure logging if your application does not create any background processing servers – client methods do not log anything, they just throw exceptions on errors.
 
 .NET Core and ASP.NET Core
 --------------------------
@@ -21,7 +21,7 @@ Logging subsystem in Hangfire is abstracted by using the `LibLog <https://github
        services.AddHangfire(config => config.UseXXXStorage());
    }
 
-You can also change the minimal logging level for background processing servers to capture lifetime events like "server is starting" and "server is stopping" ones. These events are very important to debug cases when background processing isn't working, because all the processing servers are inactive.
+You can also change the minimal logging level for background processing servers to capture lifetime events like "server is starting" and "server is stopping" ones. These events are very important to debug cases when background processing is not working because all the processing servers are inactive.
 
 .. code-block:: json
    :emphasize-lines: 5
