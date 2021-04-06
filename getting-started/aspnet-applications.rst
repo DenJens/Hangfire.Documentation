@@ -1,12 +1,12 @@
 ASP.NET Applications
 ====================
 
-You can place the background processing in an ASP.NET application without using additional processes like Windows Services. Hangfire's code is ready for unexpected process terminations, application pool recycles and restarts during the deployment process. Since persistent storages are used, you'll not lose any background job.
+You can place the background processing into an ASP.NET application without using additional processes like Windows Services. Hangfire's code is ready for unexpected process terminations, application pool recycles and restarts during the deployment process. Since persistent storage is used, you will not lose any background jobs.
 
 Installing Hangfire
 --------------------
 
-Before we start, we'll need a working ASP.NET application, you can use ASP.NET MVC or ASP.NET WebForms, the steps are almost the same. First of all, the following packages should be installed. There are a lot of ways to install NuGet packages, I'll show how to use Package Manager Console window as it doesn't require any screenshots. 
+Before we start, we will need a working ASP.NET application, you can use ASP.NET MVC or ASP.NET WebForms, the steps are almost the same. First of all, the following packages should be installed. There are a lot of ways to install NuGet packages, I will show how to use Package Manager Console window as it does not require any screenshots. 
 
 .. code-block:: powershell
   
@@ -17,9 +17,9 @@ Before we start, we'll need a working ASP.NET application, you can use ASP.NET M
 Creating a database
 -------------------
 
-As you can see from the snippet above, we'll be using SQL Server as a job storage in this article. Before configuring Hangfire, you'll need to create a database for it or use an existing one. Configuration strings below point to the ``HangfireTest`` database living in the ``SQLEXPRESS`` instance on a local machine.
+As you can see from the snippet above, we will be using SQL Server for job storage in this article. Before configuring Hangfire, you will need to create a database for it or use an existing one. Configuration strings below point to the ``HangfireTest`` database living in the ``SQLEXPRESS`` instance on a local machine.
 
-You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using other database name or instance, ensure you've changed connection strings when configuring Hangfire during the next steps.
+You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using another database name or instance, ensure you have changed the  connection strings when configuring Hangfire during the next steps.
 
 .. code-block:: sql
 
@@ -29,7 +29,7 @@ You can use SQL Server Management Studio or any other way to execute the followi
 Configuring Hangfire
 --------------------
 
-Depending on the age of your application, we'll make some modification either to the ``Startup`` class, or the ``Global.asax.cs`` file. **But not both at the same time**, however nothing terrible will happen in this case, your configuration logic will be executed only once, first invocation wins, but you may get multiple processing servers.
+Depending on the age of your application, we will make some modifications either to the ``Startup`` class, or the ``Global.asax.cs`` file. **But not both at the same time**, however nothing terrible will happen in this case, your configuration logic will be executed only once, first invocation wins, but you may get multiple processing servers.
 
 .. admonition:: Configuration settings below for new installations only
    :class: note
@@ -39,7 +39,7 @@ Depending on the age of your application, we'll make some modification either to
 Using Startup class
 ~~~~~~~~~~~~~~~~~~~~
 
-If you have a modern (cough, cough) ASP.NET application, then you'd probably have the ``Startup.cs`` file. This case is the simplest case to bootstrap Hangfire and start using background processing. There are some extension methods and their overloads available for the ``IAppBuilder`` class.
+If you have a modern (cough, cough) ASP.NET application, then you would probably have the ``Startup.cs`` file. This case is the simplest case to bootstrap Hangfire and start using background processing. There are some extension methods and there are overloads available for the ``IAppBuilder`` class.
 
 All you need is to call them, to start using both Hangfire Dashboard and Hangfire Server.
 
