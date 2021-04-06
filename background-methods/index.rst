@@ -14,7 +14,7 @@ These lines use *expression trees* -- not delegates like ``Action`` or ``Func<T>
 * Method name and its parameter types.
 * Argument values.
 
-Serialization is performed by the `Newtonsoft.Json <https://www.newtonsoft.com/json>`_ package and resulting JSON, that looks like in the following snippet, is persisted in a storage making it available for other processes. As we can see everything is passed by value, so heavy data structures will also be serialized and consume a lot of bytes in our storage.
+Serialization is performed by the `Newtonsoft.Json <https://www.newtonsoft.com/json>`_ package and the resulting JSON, that looks like what is contained within the following snippet, is persisted in storage making it available for other processes. As we can see everything is passed by value, so heavy data structures will also be serialized and consume a lot of bytes in our storage.
 
 .. code-block:: json
 
@@ -23,7 +23,7 @@ Serialization is performed by the `Newtonsoft.Json <https://www.newtonsoft.com/j
 .. admonition:: No other information is preserved
    :class: note
 
-   Local variables, instance and static fields and other information isn't available in our background jobs.
+   Local variables, instances, static fields and other information are not available within our background jobs.
 
 Parameters
 ----------
