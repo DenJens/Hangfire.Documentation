@@ -9,7 +9,7 @@ SQL Server storage implementation is available through the ``Hangfire.SqlServer`
 
    Install-Package Hangfire.SqlServer
 
-This package is a dependency of the Hangfire's bootstrapper package ``Hangfire``, so if you installed it, you don't need to install the ``Hangfire.SqlServer`` separately – it was already added to your project.
+This package is a dependency of the Hangfire's bootstrapper package ``Hangfire``, so if you installed it, you do not need to install the ``Hangfire.SqlServer`` separately – it was already added to your project.
 
 .. admonition:: Supported database engines
    :class: note
@@ -19,12 +19,12 @@ This package is a dependency of the Hangfire's bootstrapper package ``Hangfire``
 .. admonition:: Snapshot isolation is not supported!
    :class: warning
 
-   **Applies only to Hangfire < 1.5.9**: Ensure your database doesn't use the snapshot isolation level, and the ``READ_COMMITTED_SNAPSHOT`` option (another name is *Is Read Committed Snapshot On*) **is disabled**. Otherwise some of your background jobs will not be processed.
+   **Applies only to Hangfire < 1.5.9**: Ensure your database does not use the snapshot isolation level, and the ``READ_COMMITTED_SNAPSHOT`` option (another name is *Is Read Committed Snapshot On*) **is disabled**. Otherwise some of your background jobs will not be processed.
 
 Configuration
 --------------
 
-The package provides extension methods for ``GlobalConfiguration`` class. Choose either a `connection string <https://www.connectionstrings.com/sqlconnection/>`_ to your SQL Server or a connection string name, if you have it.
+The package provides extension methods for the ``GlobalConfiguration`` class. Choose either a `connection string <https://www.connectionstrings.com/sqlconnection/>`_ to your SQL Server or a connection string name, if you have it.
 
 .. code-block:: c#
 
@@ -70,7 +70,7 @@ If you want to install objects manually, or integrate it with your existing migr
 
    GlobalConfiguration.Configuration.UseSqlServerStorage("<name or connection string>", options);
 
-You can isolate HangFire database access to just the HangFire schema.  You need to create a separate HangFire user and grant the user access only to the HangFire schema. The HangFire user will only be able to alter the HangFire schema. Below is an example of using a `contained database user <https://msdn.microsoft.com/en-us/library/ff929188.aspx/>`_ for HangFire. The HangFire user has least privileges required but still allows it to upgrade the schema correctly in the future.
+You can isolate HangFire database access to just the HangFire schema.  You need to create a separate HangFire user and grant the user access only to the HangFire schema. The HangFire user will only be able to alter the HangFire schema. Below is an example of using a `contained database user <https://msdn.microsoft.com/en-us/library/ff929188.aspx/>`_ for HangFire. The HangFire user has the minimum privileges required that still allows it to upgrade the schema correctly in the future.
 
 .. code-block:: sql
 
