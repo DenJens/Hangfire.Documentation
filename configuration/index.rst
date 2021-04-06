@@ -3,7 +3,7 @@ Configuration
 
 Starting from version 1.4, ``GlobalConfiguration`` class is the preferred way to configure Hangfire. This is an entry point for a couple of methods, including ones from third-party storage implementations or other extensions. The usage is simple, just include ``Hangfire`` namespace in your application initialization class and discover extension methods for the ``GlobalConfiguration.Configuration`` property.
 
-For example, in ASP.NET applications, you can place initialization logic to the ``Global.asax.cs`` file:
+For example, in ASP.NET applications, you can place initialization logic into the ``Global.asax.cs`` file:
 
 .. code-block:: c#
 
@@ -22,7 +22,7 @@ For example, in ASP.NET applications, you can place initialization logic to the 
         }
     }
 
-For OWIN-based applications (ASP.NET MVC, Nancy, ServiceStack, FubuMVC, etc.), place the configuration lines to the OWIN Startup class.
+For OWIN-based applications (ASP.NET MVC, Nancy, ServiceStack, FubuMVC, etc.), place the configuration lines into the OWIN Startup class.
 
 .. code-block:: c#
 
