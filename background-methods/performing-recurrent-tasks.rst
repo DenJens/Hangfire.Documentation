@@ -12,7 +12,7 @@ This line creates a new entry in persistent storage. A special component in Hang
 .. admonition:: Make sure your app is always running
    :class: warning
 
-   Your Hangfire Server instance should be always on to perform scheduling and processing logic. If you perform the processing inside an ASP.NET application, please also read the :doc:`../deployment-to-production/making-aspnet-app-always-running` chapter.
+   Your Hangfire Server instance should always be on to perform scheduling and processing logic. If you perform the processing inside an ASP.NET application, please also read the :doc:`../deployment-to-production/making-aspnet-app-always-running` chapter.
 
 The ``Cron`` class contains different methods and overloads to run jobs on a minute, hourly, daily, weekly, monthly and yearly basis. You can also use `CRON expressions <http://en.wikipedia.org/wiki/Cron#CRON_expression>`_ to specify a more complex schedule:
 
@@ -23,7 +23,7 @@ The ``Cron`` class contains different methods and overloads to run jobs on a min
 Specifying identifiers
 -----------------------
 
-Each recurring job has its own unique identifier. In the previous examples it was  generated implicitly, using the type and method names of the given call expression (resulting in ``"Console.Write"`` as the identifier). The ``RecurringJob`` class contains overloads that take an explicitly defined job identifier.  So that you can refer to the job later.
+Each recurring job has its own unique identifier. In the previous examples it was generated implicitly, using the type and method names of the given call expression (resulting in ``"Console.Write"`` as the identifier). The ``RecurringJob`` class contains overloads that take an explicitly defined job identifier.  So that you can refer to the job later.
 
 .. code-block:: c#
 
