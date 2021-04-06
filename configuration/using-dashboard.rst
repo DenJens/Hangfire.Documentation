@@ -1,7 +1,7 @@
 Using Dashboard
 ================
 
-Hangfire Dashboard is a place where you could find all the information about your background jobs. It is written as an OWIN middleware (if you are not familiar with OWIN, don't worry), so you can plug it into your ASP.NET, ASP.NET MVC, Nancy, ServiceStack application as well as use `OWIN Self-Host <http://www.asp.net/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api>`_ feature to host Dashboard inside console applications or in Windows Services.
+Hangfire Dashboard is a place where you can find all the information about your background jobs. It is written as an OWIN middleware (if you are not familiar with OWIN, do not worry), so you can plug it into your ASP.NET, ASP.NET MVC, Nancy, ServiceStack application as well as use `OWIN Self-Host <http://www.asp.net/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api>`_ feature to host Dashboard inside console applications or in Windows Services.
 
 .. contents::
    :local:
@@ -12,14 +12,14 @@ Adding Dashboard (OWIN)
 .. admonition:: Additional package required for ASP.NET + IIS
    :class: note
 
-   Before moving to the next steps, ensure you have `Microsoft.Owin.Host.SystemWeb <https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb/>`_ package installed, otherwise you'll have different strange problems with the Dashboard.
+   Before moving to the next steps, ensure you have `Microsoft.Owin.Host.SystemWeb <https://www.nuget.org/packages/Microsoft.Owin.Host.SystemWeb/>`_ package installed, otherwise you will have various strange problems occuring with the Dashboard.
 
 `OWIN Startup class <http://www.asp.net/aspnet/overview/owin-and-katana/owin-startup-class-detection>`_ is intended to keep web application bootstrap logic in a single place. In Visual Studio 2013 you can add it by right clicking on the project and choosing the *Add / OWIN Startup Class* menu item.
 
 .. image:: add-owin-startup.png
 
 
-If you have Visual Studio 2012 or earlier, just create a regular class in the root folder of your application, name it ``Startup`` and place the following contents:
+If you have Visual Studio 2012 or earlier, just create a regular class in the root folder of your application, name it ``Startup`` and place within it the following contents:
 
 .. code-block:: c#
 
@@ -91,7 +91,7 @@ For ASP.NET Core environments, use the ``GetHttpContext`` extension method defin
        }
    }
 
-The second step is to pass it to the ``UseHangfireDashboard`` method. You can pass multiple filters, and the access will be granted only if *all of them* return ``true``.
+The second step is to pass it to the ``UseHangfireDashboard`` method. You can pass multiple filters, and access will be granted only if *all of them* return ``true``.
 
 .. code-block:: c#
 
@@ -155,7 +155,7 @@ By default, *Back to site* link (top-right corner of Dashboard) leads you to the
 Multiple Dashboards
 --------------------
 
-You can also map multiple dashboards that show information about different storages.
+You can also map multiple dashboards which can be configured to show information about different storages.
 
 .. code-block:: c#
 
