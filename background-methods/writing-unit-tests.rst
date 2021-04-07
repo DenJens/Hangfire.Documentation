@@ -1,11 +1,11 @@
 Writing unit tests
 ===================
 
-I will not tell you anything related to unit testing background methods, because Hangfire does not add any specific changes to them (except ``IJobCancellationToken`` interface parameter). Use your favourite tools and write unit tests for them as usual. This section describes how to test that background jobs were created.
+I will not tell you anything related to the unit testing of background methods, because Hangfire does not add any specific changes to them (except ``IJobCancellationToken`` interface parameter). As such, use your favourite tools and write unit tests for them as usual. This section describes how to test that background jobs were created.
 
 All the code examples use the static ``BackgroundJob`` class to tell you how to do this or that stuff, because it is simple for demonstrational purposes. But when you want to test a method that invokes static methods, it becomes a pain.
 
-But don't worry – the ``BackgroundJob`` class is just a facade for the ``IBackgroundJobClient`` interface and its default implementation – ``BackgroundJobClient`` class. If you want to write unit tests, use them. For example, consider the following controller that is used to enqueue background jobs:
+But do not worry – the ``BackgroundJob`` class is just a facade for the ``IBackgroundJobClient`` interface and its default implementation – ``BackgroundJobClient`` class. If you want to write unit tests, use them. For example, consider the following controller that is used to enqueue background jobs:
 
 .. code-block:: c#
 
@@ -56,4 +56,4 @@ Simple, yeah. Now you can use any mocking framework, for example, `Moq <https://
     
 .. note::
 
-   ``job.Method`` property points only to background job's method information. If you also want to check a type name, use the ``job.Type`` property.
+   ``job.Method`` property points only to the background job's method information. If you also want to check a type name, use the ``job.Type`` property.
