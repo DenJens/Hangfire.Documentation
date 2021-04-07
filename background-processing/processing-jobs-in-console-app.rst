@@ -1,7 +1,7 @@
 Processing jobs in a console application
 =========================================
 
-To start using Hangfire in a console application, you'll need to install Hangfire packages to your console application first. So, use your Package Manager Console window to install it:
+To start using Hangfire in a console application, you will need to install Hangfire packages to your console application first. So, use your Package Manager Console window to install it:
 
 .. code-block:: powershell
 
@@ -16,7 +16,7 @@ Then, install the needed package for your job storage. For example, you need to 
 .. admonition:: ``Hangfire.Core`` package is enough
    :class: note
 
-   Please don't install the ``Hangfire`` package for console applications as it is a quick-start package only and contain dependencies you may not need (for example, ``Microsoft.Owin.Host.SystemWeb``).
+   Please do not install the ``Hangfire`` package for console applications as it is a quick-start package only and contains dependencies you may not need (for example, ``Microsoft.Owin.Host.SystemWeb``).
 
 After installing packages, all you need is to create a new *Hangfire Server* instance and start it as written in the :doc:`previous <processing-background-jobs>` chapter. However, there are some details here:
 
