@@ -25,7 +25,7 @@ Make your background methods reentrant
 
 `Reentrancy <https://en.wikipedia.org/wiki/Reentrant_(subroutine)>`_ means that a method can be interrupted in the middle of its execution and then safely called again. The interruption can be caused by many different things (i.e. exceptions, server shut-down), and Hangfire will attempt to retry processing many times.
 
-You can have many problems, if you don't prepare your jobs to be reentrant. For example, if you are using an email sending background job and experience an error with your SMTP service, you can end with multiple emails sent to the addressee. 
+You can have many problems, if you do not prepare your jobs to be reentrant. For example, if you are using an email sending background job and experience an error with your SMTP service, you can end with multiple emails sent to the addressee. 
 
 Instead of doing this:
 
