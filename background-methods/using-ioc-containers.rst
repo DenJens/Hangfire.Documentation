@@ -1,7 +1,7 @@
 Using IoC containers
 =====================
 
-As I said in the :doc:`previous section <passing-dependencies>` Hangfire uses the ``JobActivator`` class to instantiate the target types before invoking instance methods. You can override its behavior to perform more complex logic on a type instantiation. For example, you can tell it to use IoC container that is used in your project:
+As I said in the :doc:`previous section <passing-dependencies>` Hangfire uses the ``JobActivator`` class to instantiate the target types before invoking instance methods. You can override its behavior to perform more complex logic on a type instantiation. For example, you can tell it to use the IoC container that is used in your project:
 
 .. code-block:: c#
 
@@ -30,7 +30,7 @@ Then, you need to register it as a current job activator before starting the Han
    ...
    app.UseHangfireServer();
 
-To simplify the initial installation, there are some integration  packages already available on NuGet. Please see the Extensions page on the official site to get the list of all available extension packages: https://www.hangfire.io/extensions.html#ioc-containers.
+To simplify the initial installation, there are some integration packages already available on NuGet. Please see the Extensions page on the official site to get the list of all available extension packages: https://www.hangfire.io/extensions.html#ioc-containers.
 
 Some of these activators also provide an extension method for the ``GlobalConfiguration`` class:
 
