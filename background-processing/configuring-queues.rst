@@ -16,7 +16,7 @@ To place a job into a different queue, use the ``QueueAttribute`` class on your 
 .. admonition:: Queue name argument formatting 
    :class: warning
 
-   The Queue name argument must consist of lowercase letters, digits, underscore, and dash (since 1.7.6) characters only.
+   The Queue name argument (since 1.7.6) can only consist of the following characters : lowercase letters, digits, underscores, and dashes.
   
 To begin processing multiple queues, you need to update your ``BackgroundJobServer`` configuration.
 
@@ -34,9 +34,9 @@ To begin processing multiple queues, you need to update your ``BackgroundJobServ
 .. admonition:: Processing order
    :class: note
 
-   Queues are run in the order that depends on the concrete storage implementation. For example, when we are using *Hangfire.SqlServer* the order is defined by alphanumeric order and array index is ignored. When using *Hangfire.Pro.Redis* package, array index is important and queues with a lower index will be processed first.
+   Queues are run in the order that depends on the concrete storage implementation. For example, when we are using *Hangfire.SqlServer* the order is defined by alphanumeric order and the array index is ignored. When using *Hangfire.Pro.Redis* package, the array index is important and queues with a lower index will be processed first.
 
-   The example above shows a generic approach, where workers will fetch jobs from the ``alpha`` queue first, ``beta`` second, and then from the ``default`` queue, regardless of an implementation.
+   The example above shows a generic approach, where workers will fetch jobs from the ``alpha`` queue first, ``beta`` second, and then from the ``default`` queue, regardless of the implementation.
 
 ASP.NET Core
 ------------
