@@ -8,7 +8,7 @@ We should use cancellation tokens as much as possible – they greatly lower the
 CancellationToken
 -----------------
 
-Starting from Hangfire 1.7.0 it's possible to use a regular ``CancellationToken`` class for this purpose. Unlike the previous ``IJobCancellationToken``-based implementation, the new one is fully asynchronous and doesn't lead to immediate storage requests so it's now safe to use it even in tight loops.
+Starting from Hangfire 1.7.0 it is possible to use a regular ``CancellationToken`` class for this purpose. Unlike the previous ``IJobCancellationToken``-based implementation, the new one is fully asynchronous and does not lead to immediate storage requests so it is now safe to use it even in tight loops.
 
 .. code-block:: c#
 
@@ -26,7 +26,7 @@ When creating such a background job, any ``CancellationToken`` instance can be u
 
    BackgroundJob.Enqueue<IService>(x => x.LongRunningMethod(CancellationToken.None));
 
-Dedicated background process is watching for all the current background jobs that have a cancellation token parameter in a method and polls the storage to watch their current states. When state change is detected or when shutdown is requested, the corresponding cancellation token is canceled. 
+A dedicated background process is watching for all the current background jobs that have a cancellation token parameter in a method and polls the storage to watch their current states. When a state change is detected or when a shutdown is requested, the corresponding cancellation token is canceled. 
 
 The polling delay is configurable via the ``BackgroundJobServerOptions.CancellationCheckInterval`` server option.
 
