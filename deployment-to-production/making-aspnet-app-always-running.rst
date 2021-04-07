@@ -1,11 +1,11 @@
-Making ASP.NET application always running
-==========================================
+Making ASP.NET Applications always running
+===========================================
 
-By default, Hangfire Server instance in a web application will not be started until the first user hits your site. Even more, there are some events that will bring your web application down after some time (I'm talking about Idle Timeout and different app pool recycling events). In these cases your :doc:`recurring tasks <../background-methods/performing-recurrent-tasks>` and :doc:`delayed jobs <../background-methods/calling-methods-with-delay>` will not be enqueued, and :doc:`enqueued jobs <../background-methods/calling-methods-in-background>` will not be processed. 
+By default, Hangfire Server instance in a web application will not be started until the first user hits your site. Even more, there are some events that will bring your web application down after some time (I am talking about Idle Timeout and different app pool recycling events). In these cases your :doc:`recurring tasks <../background-methods/performing-recurrent-tasks>` and :doc:`delayed jobs <../background-methods/calling-methods-with-delay>` will not be enqueued, and :doc:`enqueued jobs <../background-methods/calling-methods-in-background>` will not be processed. 
 
 This is particulary true for smaller sites, as there may be long periods of user inactivity. But if you are running critical jobs, you should ensure that your Hangfire Server instance is always running to guarantee the in-time background job processing.
 
-On-Premise applications
+On-Premise Applications
 ------------------------
 
 For web applications running on servers under your control, either physical or virtual, you can use the auto-start feature of IIS ≥ 7.5 shipped with Windows Server ≥ 2008 R2. Full setup requires the following steps to be done:
@@ -14,10 +14,10 @@ For web applications running on servers under your control, either physical or v
 2. `Configure Automatic Startup <http://technet.microsoft.com/en-us/library/cc772112(v=ws.10).aspx>`_ for an Application pool (enabled by default).
 3. Enable Always Running Mode for Application pool and configure Auto-start feature as written below.
 
-Creating classes
+Creating Classes
 ~~~~~~~~~~~~~~~~~
 
-First, you'll need a special class that implements the ``IProcessHostPreloadClient`` interface. It will be called automatically by Windows Process Activation service during its start-up and after each Application pool recycle.
+First, you will need a special class that implements the ``IProcessHostPreloadClient`` interface. It will be called automatically by Windows Process Activation service during its start-up and after each Application pool recycle.
 
 .. code-block:: c#
 
@@ -29,7 +29,7 @@ First, you'll need a special class that implements the ``IProcessHostPreloadClie
        }
    }
 
-Then, update your ``global.asax.cs`` file as described below. :doc:`It is important <../background-processing/processing-background-jobs>` to call the ``Stop`` method of the ``BackgroundJobServer`` class instance, and it is also important to start Hangfire server in environments that don't have auto-start feature enabled (for example, on development machines) also.
+Then, update your ``global.asax.cs`` file as described below. :doc:`It is important <../background-processing/processing-background-jobs>` to call the ``Stop`` method of the ``BackgroundJobServer`` class instance, and it is also important to start Hangfire server in environments that do not have auto-start feature enabled (for example, on development machines) also.
 
 .. code-block:: c#
 
@@ -122,7 +122,7 @@ And optionally, if you want to map Hangfire Dashboard UI, create an OWIN startup
 Enabling Service Auto-start
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After creating above classes, you should edit the global ``applicationHost.config`` file (``%WINDIR%\System32\inetsrv\config\applicationHost.config``). First, you need to change the start mode of your application pool to ``AlwaysRunning``, and then enable Service AutoStart Providers.
+After creating the above classes, you should edit the global ``applicationHost.config`` file (``%WINDIR%\System32\inetsrv\config\applicationHost.config``). First, you need to change the start mode of your application pool to ``AlwaysRunning``, and then enable Service AutoStart Providers.
 
 .. admonition:: Save only after all modifications
    :class: note
@@ -151,7 +151,7 @@ After creating above classes, you should edit the global ``applicationHost.confi
 
 Note that for the last entry, ``WebApplication1.ApplicationPreload`` is the full name of a class in your application that implements ``IProcessHostPreloadClient`` and ``WebApplication1`` is the name of your application's library. You can read more about this `here <http://www.asp.net/whitepapers/aspnet4#0.2__Toc253429241>`_.
  
-There is no need to set IdleTimeout to zero -- when Application pool's start mode is set to ``AlwaysRunning``, idle timeout does not work anymore.
+There is no need to set IdleTimeout to zero -- when the Application pool's start mode is set to ``AlwaysRunning``, idle timeout does not work anymore.
 
 Ensuring auto-start feature is working
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,14 +159,14 @@ Ensuring auto-start feature is working
 .. admonition:: If something went wrong...
    :class: note
 
-   If your app won't load after these changes made, check your Windows Event Log by opening **Control Panel → Administrative Tools → Event Viewer**. Then open *Windows Logs → Application* and look for a recent error records.
+   If your app will not load after these changes made, check your Windows Event Log by opening **Control Panel → Administrative Tools → Event Viewer**. Then open *Windows Logs → Application* and look for any recent error records.
 
-The simplest method - recycle your Application pool, wait for 5 minutes, then go to the Hangfire Dashboard UI and check that current Hangfire Server instance was started 5 minutes ago. If you have problems -- don't hesitate to ask them on `forum <https://discuss.hangfire.io>`_.
+The simplest method - recycle your Application pool, wait for 5 minutes, then go to the Hangfire Dashboard UI and check that the current Hangfire Server instance was started 5 minutes ago. If you have problems -- do not hesitate to ask them on the `forum <https://discuss.hangfire.io>`_.
 
-Azure web applications
+Azure Web Applications
 -----------------------
 
-Enabling always running feature for application hosted in Microsoft Azure is simpler a bit: just turn on the ``Always On`` switch on the Configuration page and save settings.
+Enabling the always running feature for applications hosted in Microsoft Azure is a bit simpler: just turn on the ``Always On`` switch on the Configuration page and save settings.
 
 This setting does not work for free sites.
 
@@ -179,15 +179,15 @@ If nothing works for you…
 … because you are using shared hosting, free Azure web site or something else (btw, can you tell me your configuration in this case?), then you can use the following ways to ensure that Hangfire Server is always running:
 
 1. Use :doc:`separate process <../background-processing/placing-processing-into-another-process>` to handle background jobs either on the same, or dedicated host.
-2. Make HTTP requests to your web site on a recurring basis by external tool (for example, `Pingdom <https://www.pingdom.com/>`_).
+2. Make HTTP requests to your web site on a recurring basis via an external tool (for example, `Pingdom <https://www.pingdom.com/>`_).
 3. *Do you know any other ways? Let me know!*
 
-Making ASP.NET Core application always running on IIS
+Making ASP.NET Core Application always running on IIS
 -----------------------------------------------------
 
 Follow these directions in IIS:
 
-1. Set application pool under which the application runs to:
+1. Set the application pool under which the application runs to:
 
     a. .NET CLR version: **.NET CLR Version v4.0.30319**
         i. Normally, for a .NET Core app, you'd use *No managed code*, but if you do that, the application preload option won't work.
