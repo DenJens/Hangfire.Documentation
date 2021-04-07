@@ -5,11 +5,11 @@ Sending Mail in Background with ASP.NET MVC
    :local:
    :depth: 2
 
-Let's start with a simple example: you are building your own blog using ASP.NET MVC and want to receive an email notification about each posted comment. We will use the simple but awesome `Postal <http://aboutcode.net/postal/>`_ library to send emails. 
+Let us start with a simple example: you are building your own blog using ASP.NET MVC and want to receive an email notification about each posted comment. We will use the simple but awesome `Postal <http://aboutcode.net/postal/>`_ library to send emails. 
 
 .. tip::
 
-   I've prepared a simple application that has only comments list, you can `download its sources <https://github.com/odinserj/Hangfire.Mailer/releases/tag/vBare>`_ to start work on tutorial.
+   I have prepared a simple application that has only comments list, you can `download its sources <https://github.com/odinserj/Hangfire.Mailer/releases/tag/vBare>`_ to start work on tutorial.
 
 You already have a controller action that creates a new comment, and want to add the notification feature.
 
@@ -107,29 +107,29 @@ Then configure the delivery method in the ``web.config`` file (by default, tutor
     </mailSettings>
   </system.net>
 
-That's all. Try to create some comments and you'll see notifications in the pickup directory.
+That is all. Try to create some comments and you will see notifications in the pickup directory.
 
 Further considerations
 -----------------------
 
-But why should a user  wait until the notification was sent? There should be some way to send emails asynchronously, in the background, and return a response to the user as soon as possible. 
+But why should a user wait until the notification was sent? There should be some way to send emails asynchronously, in the background, and return a response to the user as soon as possible. 
 
-Unfortunately, `asynchronous <http://www.asp.net/mvc/tutorials/mvc-4/using-asynchronous-methods-in-aspnet-mvc-4>`_ controller actions `do not help <http://blog.stephencleary.com/2012/08/async-doesnt-change-http-protocol.html>`_ in this scenario, because they do not yield response to the user while waiting for the asynchronous operation to complete. They only solve internal issues related to thread pooling and application capacity.
+Unfortunately, `asynchronous <http://www.asp.net/mvc/tutorials/mvc-4/using-asynchronous-methods-in-aspnet-mvc-4>`_ controller actions `do not help <http://blog.stephencleary.com/2012/08/async-doesnt-change-http-protocol.html>`_ in this scenario, because they do not yield a response to the user while waiting for the asynchronous operation to complete. They only solve internal issues related to thread pooling and application capacity.
 
-There are `great problems <http://blog.stephencleary.com/2012/12/returning-early-from-aspnet-requests.html>`_ with background threads also. You should use Thread Pool threads or custom ones that are running inside ASP.NET application with care – you can simply lose your emails during the application recycle process (even if you register an implementation of the ``IRegisteredObject`` interface in ASP.NET).
+There are `great problems <http://blog.stephencleary.com/2012/12/returning-early-from-aspnet-requests.html>`_ with background threads also. You should use Thread Pool threads or custom ones that are running inside an ASP.NET application with care – you can simply lose your emails during the application recycle process (even if you register an implementation of the ``IRegisteredObject`` interface in ASP.NET).
 
 And you are unlikely to want to install external Windows Services or use Windows Scheduler with a console application to solve this simple problem (we are building a personal blog, not an e-commerce solution).
 
 Installing Hangfire
 --------------------
 
-To be able to put tasks into the background and not lose them during application restarts, we'll use `Hangfire <https://www.hangfire.io>`_. It can handle background jobs in a reliable way inside ASP.NET application without external Windows Services or Windows Scheduler.
+To be able to put tasks into the background and not lose them during application restarts, we will use `Hangfire <https://www.hangfire.io>`_. It can handle background jobs in a reliable way inside an ASP.NET application without external Windows Services nor Windows Scheduler.
 
 .. code-block:: powershell
 
    Install-Package Hangfire
 
-Hangfire uses SQL Server or Redis to store information about background jobs. So, let's configure it. Add a new class Startup into the root of the project:
+Hangfire uses SQL Server or Redis to store information about background jobs. So, let us configure it. Add a new class Startup into the root of the project:
 
 .. code-block:: c#
 
@@ -171,9 +171,9 @@ Now we are ready to use Hangfire. It asks us to wrap a piece of code that should
         return RedirectToAction("Index");
     }
 
-Note, that we are passing a comment identifier instead of a full comment – Hangfire should be able to serialize all method call arguments to string values. The default serializer does not know anything about our ``Comment`` class. Furthermore, the integer identifier takes less space in serialized form than the full comment text.
+Note, that we are passing a comment identifier instead of a full comment – Hangfire should be able to serialize all the method call arguments to string values. The default serializer does not know anything about our ``Comment`` class. Furthermore, the integer identifier takes less space in serialized form than the full textual comment.
 
-Now, we need to prepare the ``NotifyNewComment`` method that will be called in the background. Note that ``HttpContext.Current`` is not available in this situation, but Postal library can work even `outside of ASP.NET request <http://aboutcode.net/postal/outside-aspnet.html>`_. But first install another package (that is needed for Postal 0.9.2, see `the issue <https://github.com/andrewdavey/postal/issues/68>`_). Let's update package and bring in the RazorEngine
+Now, we need to prepare the ``NotifyNewComment`` method that will be called in the background. Note that ``HttpContext.Current`` is not available in this situation, but the Postal library can work even `outside of ASP.NET request <http://aboutcode.net/postal/outside-aspnet.html>`_. But first install another package (that is needed for Postal 0.9.2, see `the issue <https://github.com/andrewdavey/postal/issues/68>`_). Now let us update package and bring in the RazorEngine
 
 .. code-block:: powershell
 
@@ -206,17 +206,17 @@ Now, we need to prepare the ``NotifyNewComment`` method that will be called in t
         }
     }
 
-This is a plain C# static method. We are creating an ``EmailService`` instance, finding the desired comment and sending a mail with Postal. Simple enough, especially when compared to a custom Windows Service solution.
+This is a plain C# static method. We are creating an ``EmailService`` instance, finding the desired comment and sending an email with Postal. Simple enough, especially when compared to a custom Windows Service solution.
 
 .. warning::
 
-   Emails now are sent outside of request processing pipeline. As of Postal 1.0.0, there are the following `limitations <http://aboutcode.net/postal/outside-aspnet.html>`_: you can not use layouts for your views, you MUST use ``Model`` and not ``ViewBag``, embedding images is `not supported <https://github.com/andrewdavey/postal/issues/44>`_ either.
+   Emails now are sent outside of the request processing pipeline. As of Postal 1.0.0, there are the following `limitations <http://aboutcode.net/postal/outside-aspnet.html>`_: you can not use layouts for your views, you MUST use ``Model`` and not ``ViewBag``, embedding images is `not supported <https://github.com/andrewdavey/postal/issues/44>`_ either.
 
-That's all! Try to create some comments and see the ``C:\Temp`` path. You also can check your background jobs at ``http://<your-app>/hangfire``. If you have any questions, you are welcome to use the comments form below.
+That is all! Try to create some comments and see the ``C:\Temp`` path. You also can check your background jobs at ``http://<your-app>/hangfire``. If you have any questions, you are welcome to use the comments form below.
 
 .. note::
 
-   If you experience assembly load exceptions, please, please delete the following sections from the ``web.config`` file (I forgot to do this, but don't want to re-create the repository):
+   If you experience assembly load exceptions, please, please delete the following sections from the ``web.config`` file (I forgot to do this, but do not want to re-create the repository):
 
    .. code-block:: xml
 
@@ -297,9 +297,9 @@ Or locally by applying the attribute to a method:
        /* ... */
    }
    
-You can see the logging is working when you add a new breakpoint in LogFailureAttribute class inside method  OnStateApplied
+You can see the logging is working when you add a new breakpoint in LogFailureAttribute class inside method OnStateApplied
 
-If you like to use any of common logger and you do not need to do anything. Let's take NLog as an example.
+If you would like to use any of the common logger; you do not need to do anything. Let us take NLog as an example.
 Install NLog (current version: 4.2.3)
 
 .. code-block:: powershell
@@ -340,7 +340,7 @@ Add a new Nlog.config file into the root of the project.
      </rules>
    </nlog>
 
-run application and new log file could be find on cd %appdata%\HangFire.Mailer\Debug.log 
+run the application and a new log file can be found on cd %appdata%\HangFire.Mailer\Debug.log 
 
 Fix-deploy-retry
 -----------------
