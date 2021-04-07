@@ -1,7 +1,7 @@
 Processing jobs in a web application
 =====================================
 
-Ability to process background jobs directly in web applications is a primary goal of Hangfire. No external application like Windows Service or console application is required for running background jobs, however you will be able to change your decision later if you really need it. So, you can postpone architecture decisions that complicate things.
+The ability to process background jobs directly within web applications is a primary goal of Hangfire. No external application like Windows Service or console application is required for running background jobs, however you will be able to change your decision later if you really need it. So, you can postpone architecture decisions that complicate things.
 
 Since Hangfire does not have any specific dependencies and does not depend on ``System.Web``, it can be used together with any web framework for .NET:
 
@@ -20,7 +20,7 @@ The basic way (but not the simplest -- see the next section) to start using Hang
 .. admonition:: Dispose the server instance when possible
    :class: note
 
-   In some web application frameworks it may be unclear when to call the ``Dispose`` method. If it is really impossible, you can omit this call as :doc:`described here <processing-background-jobs>` (but you'll lose the *graceful shutdown* feature).
+   In some web application frameworks it may be unclear when to call the ``Dispose`` method. If it is really impossible, you can omit this call as :doc:`described here <processing-background-jobs>` (but you will lose the *graceful shutdown* feature).
 
 For example, in ASP.NET applications the best place for start/dispose method invocations is the ``global.asax.cs`` file:
 
@@ -54,7 +54,7 @@ For example, in ASP.NET applications the best place for start/dispose method inv
 Using OWIN extension methods
 -----------------------------
 
-Hangfire also provides a dashboard that is implemented on top of OWIN pipeline to process requests. If you have simple set-up and want to keep Hangfire initialization logic in one place, consider using Hangfire's extension methods for OWIN's ``IAppBuilder`` interface:
+Hangfire also provides a dashboard that is implemented on top of OWIN pipeline to process requests. If you have a simple set-up and want to keep Hangfire initialization logic in one place, consider using Hangfire's extension methods for OWIN's ``IAppBuilder`` interface:
 
 .. admonition:: Install ``Microsoft.Owin.Host.SystemWeb`` for ASP.NET + IIS
    :class: warning
