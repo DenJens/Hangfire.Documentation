@@ -1,9 +1,9 @@
 Tracking the progress
 ======================
 
-There are two ways to implement this task: polling and pushing. Polling is easier to understand, but server push is a more comfortable way, because it helps you to avoid unnecessary calls to server. Plus, `SignalR <http://signalr.net>`_ greatly simplifies the latter task.
+There are two ways to implement this task: polling and pushing. Polling is easier to understand, but server push is a more comfortable way, because it helps you to avoid unnecessary calls to the server. Plus, `SignalR <http://signalr.net>`_ greatly simplifies the latter task.
 
-I'll show you a simple example, where client only needs to check for a job completion. You can see the full sample in `Hangfire.Highlighter <https://github.com/odinserj/Hangfire.Highlighter>`_ project. 
+I will show you a simple example, where the client only needs to check for a job completion. You can see the full sample in `Hangfire.Highlighter <https://github.com/odinserj/Hangfire.Highlighter>`_ project. 
 
 Highlighter has the following background job that calls an external web service to highlight code snippets:
 
@@ -25,7 +25,7 @@ Polling for a job status
 
 When can we say that this job is incomplete? When the ``HighlightedCode`` property value *is null*. When can we say it was completed? When the specified property *has value* – this example is simple enough.
 
-So, when we are rendering the code snippet that is not highlighted yet, we need to render a JavaScript that makes ajax calls with some interval to some controller action that returns the job status (completed or not) until the job was finished.
+So, when we are rendering the code snippet that is not highlighted yet, we need to render a JavaScript that makes ajax calls with some interval to some controller action that returns the job status (completed or not) until the job has finished.
 
 .. code-block:: c#
 
@@ -38,7 +38,7 @@ So, when we are rendering the code snippet that is not highlighted yet, we need 
             : Content(snippet.HighlightedCode);
     }
 
-When code snippet becomes highlighted, we can stop the polling and show the highlighted code. But if you want to track progress of your job, you need to perform extra steps:
+When the code snippet becomes highlighted, we can stop the polling and show the highlighted code. But if you want to track progress of your job, you need to perform extra steps:
 
 * Add a column ``Status`` to the snippets table.
 * Update this column during background work.
@@ -49,9 +49,9 @@ But there is a better way.
 Using server push with SignalR
 -------------------------------
 
-Why do we need to poll our server? It can say when the snippet becomes highlighted itself. And `SignalR <http://signalr.net>`_, an awesome library to perform server push, will help us. If you don't know about this library, look at it, and you'll love it. Really.
+Why do we need to poll our server? It can say when the snippet becomes highlighted itself. And `SignalR <http://signalr.net>`_, an awesome library that can perform server push, will help us. If you do not know about this library, look at it, and you will love it. Really.
 
-I don't want to include all the code snippets here (you can look at the sources of this sample). I'll show you only the two changes that you need, and they are incredibly simple.
+I do not want to include all the code snippets here (you can look at the sources of this sample). I will show you only the two changes that you need, and they are incredibly simple.
 
 First, you need to add a hub:
 
@@ -102,6 +102,6 @@ And second, you need to make a small change to your background job method:
             .highlight(snippet.HighlightedCode);
     }
 
-And that's all! When user opens a page that contains unhighlighted code snippet, his browser connects to the server, subscribes for code snippet notification and waits for update notifications. When background job is about to be done, it sends the highlighted code to all subscribed users.
+And that is all! When a user opens a page that contains an unhighlighted code snippet, his browser connects to the server, subscribes for code snippet notification and waits for update notifications. When the background job is about to be done, it sends the highlighted code to all subscribed users.
 
-If you want to add progress tracking, just add it. No additional tables and columns required, only JavaScript function. This is an example of real and reliable asynchrony for ASP.NET applications without taking much effort to it.
+If you want to add progress tracking, just add it. No additional tables and columns required, only a JavaScript function. This is an example of real and reliable asynchrony for ASP.NET applications without taking much effort to it.
