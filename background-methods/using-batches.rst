@@ -4,9 +4,9 @@ Using Batches
 .. admonition:: Pro Only
    :class: note
 
-   This feature is a part of `Hangfire Pro <https://www.hangfire.io/pro/>`_ package set
+   This feature is a part of the `Hangfire Pro <https://www.hangfire.io/pro/>`_ package set
 
-Batches allow you to create a bunch of background jobs *atomically*. This means that if there was an exception during the creation of background jobs, none of them will be processed. Consider you want to send 1000 emails to your clients, and they really want to receive these emails. Here is the old way:
+Batches allow you to create a bunch of background jobs *automically*. This means that if there was an exception during the creation of one of the background jobs, then none of them will be processed. So consider you want to send 1000 emails to your clients, and they really want to receive these emails. Here is the old way:
 
 .. code-block:: c#
 
@@ -16,7 +16,7 @@ Batches allow you to create a bunch of background jobs *atomically*. This means 
        // What to do on exception?
    }
 
-But what if storage become unavailable on ``i == 500``? 500 emails may be already sent, because worker threads will pick up and process jobs once they created. If you re-execute this code, some of your clients may receive annoying duplicates. So if you want to handle this correctly, you should write more code to track what emails were sent. 
+But what if storage become unavailable on ``i == 500``? 500 emails may be already sent, because worker threads will pick up and process jobs once they are created. If you re-execute this code, some of your clients may receive annoying duplicates. So if you want to handle this correctly, you should write more code to track what emails were sent. 
 
 But here is a much simpler method:
 
@@ -30,7 +30,7 @@ But here is a much simpler method:
        }
    });
 
-In case of exception, you may show an error to a user, and simply ask to retry her action after some minutes. No other code required!
+In case of an exception, you may show an error to a user, and simply ask to retry their action after so many minutes. No other code required!
 
 Installation
 -------------
@@ -41,7 +41,7 @@ Batches are available in the `Hangfire.Pro <https://nuget.hangfire.io/feeds/hang
 
    PM> Install-Package Hangfire.Pro
 
-Batches require to add some additional job filters, some new pages to the Dashboard, and some new navigation menu items. But thanks to the new ``GlobalConfiguration`` class, it is now as simple as a one method call:
+Batches require you to add some additional job filters, some new pages to the Dashboard, and some new navigation menu items. But thanks to the new ``GlobalConfiguration`` class, it is now as simple as a one method call:
 
 .. code-block:: c#
 
