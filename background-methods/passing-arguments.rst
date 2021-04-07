@@ -1,7 +1,7 @@
 Passing arguments
 ==================
 
-You can pass additional data to your background jobs as a regular method arguments. I'll write the following line once again (hope it hasn't bothered you):
+You can pass additional data to your background jobs as regular method arguments. I will write the following line once again (hope it has not bothered you):
 
 .. code-block:: c#
 
@@ -14,7 +14,7 @@ The **awesome** `Newtonsoft.Json <http://james.newtonking.com/json>`_ package is
 .. admonition:: Reference parameters are not supported
    :class: note
 
-   You can not pass arguments to parameters by reference – ``ref`` and ``out`` keywords are **not supported**.
+   You cannot pass arguments to parameters by reference – ``ref`` and ``out`` keywords are **not supported**.
 
 Since arguments are serialized, consider their values carefully as they can blow up your job storage. Most of the time it is more efficient to store concrete values in an application database and pass their identifiers only to your background jobs.
 
