@@ -1,16 +1,16 @@
 Placing processing into another process
 ========================================
 
-You may decide to move the processing to the different process from the main application. For example, your web application will only enqueue background jobs, leaving their performance to a Console application or Windows Service. First of all, let's overview the reasons for such decision.
+You may decide to move the processing to a different process from the main application. For example, your web application will only enqueue background jobs, leaving their performance to a Console application or Windows Service. First of all, let us overview the reasons for such a decision.
 
 Well scenarios
 ---------------
 
-* Your background processing consumes **too much CPU or other resources**, and this decreases main application's performance. So you want to use separate machine for processing background jobs.
-* You have long-running jobs that **are constantly aborted** (retrying, aborted, retried again and so on) due to regular shutdowns of the main application. So you want to use separate process with increased lifetime (and you can't use :doc:`always running mode <../deployment-to-production/making-aspnet-app-always-running>` for your web application).
+* Your background processing consumes **too much CPU or other resources**, and this decreases the main application's performance. So you want to use a separate machine for processing background jobs.
+* You have long-running jobs that **are constantly aborted** (retrying, aborted, retried again and so on) due to regular shutdowns of the main application. So you want to use a separate process with increased lifetime (and you cannot use :doc:`always running mode <../deployment-to-production/making-aspnet-app-always-running>` for your web application).
 * *Do you have other suggestions? Please post them in the comment form below*.
 
-You can stop processing background jobs in your main application by simply removing the instantiation of the ``BackgroundJobServer`` class (if you create it manually) or removing an invocation of the ``UseHangfireServer`` method from your OWIN configuration class.
+You can stop processing background jobs in your main application by simply removing the instantiation of the ``BackgroundJobServer`` class (if you created it manually) or removing an invocation of the ``UseHangfireServer`` method from your OWIN configuration class.
 
 After accomplishing the first step, you need to enable processing in another process, here are some guides:
 
@@ -20,12 +20,12 @@ After accomplishing the first step, you need to enable processing in another pro
 .. admonition:: Same storage requires the same code base
    :class: note
 
-   Ensure that all of your Client/Servers use **the same job storage** and **have the same code base**. If client enqueues a job based on the ``SomeClass`` that is absent in server's code, the latter will simply throw a performance exception.
+   Ensure that all of your Client/Servers use **the same job storage** and **have the same code base**. If a client enqueues a job based on the ``SomeClass`` that is absent in the server's code, the latter will simply throw a performance exception.
 
-If this is a problem, your client may have references only to interfaces, whereas server provide implementations (please see the :doc:`../background-methods/using-ioc-containers` chapter).
+If this is a problem, your client may have references only to interfaces, whereas the server provides implementations (please see the :doc:`../background-methods/using-ioc-containers` chapter).
 
 Doubtful scenarios
 -------------------
 
-* You don't want to consume additional Thread Pool threads with background processing -- Hangfire Server uses **custom, separate and limited thread pool**.
-* You are using Web Farm or Web Garden and don't want to face with synchronization issues -- Hangfire Server is **Web Garden/Web Farm friendly** by default.
+* You do not want to consume additional Thread Pool threads with background processing -- Hangfire Server uses **custom, separate and limited thread pools**.
+* You are using a Web Farm or Web Garden and do not want to be faced with synchronization issues -- Hangfire Server is **Web Garden/Web Farm friendly** by default.
